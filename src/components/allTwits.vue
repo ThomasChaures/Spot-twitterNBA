@@ -80,7 +80,7 @@ export default {
       twitsAjenos: [
         {
           user: 'BasketFan123',
-          img: '/src/assets/img/imgUsers/user-1.png',
+          img: '@/assets/img/imgUsers/user-1.png',
           twit: '¡Qué temporada tan increíble de los Nuggets! Jokic está imparable. 🏀🔥 #MVP',
           likes: 120,
           guardados: 30,
