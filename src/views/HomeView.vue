@@ -14,7 +14,7 @@
               <button @click="borrar(idLast)">Eliminar</button>
             </div>
             <div class="img-perfil">
-              <img src="@/assets/img/user.png" alt="Descripción de la imagen" />
+              <img :src="userIMG" alt="Descripción de la imagen" />
             </div>
             <div>
               <p class="user">@{{ user }}</p>
@@ -157,6 +157,7 @@
 </style>
 
 <script>
+import userIMG from '../assets/img/user.png'
 import Noticias from '../components/noticias.vue'
 import Login from '../components/login.vue'
 import Twit from '../components/twit.vue'
@@ -173,6 +174,7 @@ export default {
   },
   data() {
     return {
+      userIMG,
       flagSession: false,
       user: '',
       twits: [],

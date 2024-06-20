@@ -21,7 +21,7 @@ export default {
       console.log(this.idTwit)
     },
     modificarTwit: function (arr, index, twit) {
-      if (twit !== '' && twit.length > 0) {
+      if (twit.trim() !== '') {
         if (index >= 0 && index < arr.length) {
           arr[index] = twit
           localStorage.setItem('twits', JSON.stringify(arr))

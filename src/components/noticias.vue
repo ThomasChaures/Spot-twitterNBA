@@ -1,7 +1,6 @@
 <template>
   <div class="contenedor-n animate__animated animate__bounceInRight">
     <div class="h2-n"><h2>Noticias</h2></div>
-
     <ul>
       <li class="noti-li" v-for="(item, index) in noticias" :key="index">
         <div class="noti-img">
@@ -9,7 +8,6 @@
         </div>
         <div class="texto">
           <p>{{ item.noticia }}</p>
-
           <p>{{ item.fecha }}</p>
         </div>
       </li>
@@ -20,7 +18,7 @@
 <style scoped>
 .contenedor-n {
   position: fixed;
-  top: 0px;
+  top: 0;
   right: 220px;
   width: 400px;
   background: rgba(255, 255, 255, 0.932);
@@ -31,7 +29,7 @@
 
 @media screen and (max-width: 1850px) {
   .contenedor-n {
-    right: 0px;
+    right: 0;
   }
 }
 
@@ -95,33 +93,39 @@ p:nth-child(2) {
 </style>
 
 <script>
+import img1 from '../assets/img/noticias/n1.jpg'
+import img2 from '../assets/img/noticias/n2.jpg'
+import img3 from '../assets/img/noticias/n3.jpg'
+import img4 from '../assets/img/noticias/n4.jpg'
+import img5 from '../assets/img/noticias/n5.jpg'
+
 export default {
   name: 'Noticias',
-  data: function () {
+  data() {
     return {
       noticias: [
         {
-          img: '/src/assets/img/noticias/n1.jpg',
+          img: img1,
           noticia: 'Dallas aplasta a Boston y se agarra al milagro en las Finales',
           fecha: '15 JUNIO 2024'
         },
         {
-          img: '/src/assets/img/noticias/n2.jpg',
+          img: img2,
           noticia: 'Los Celtics acarician el 18º',
           fecha: '13 JUNIO 2024'
         },
         {
-          img: '/src/assets/img/noticias/n3.jpg',
+          img: img3,
           noticia: 'Los Knicks garantizarán el contrato de Bogdanovic',
           fecha: '17 JUNIO 2024'
         },
         {
-          img: '/src/assets/img/noticias/n4.jpg',
+          img: img4,
           noticia: 'Jarret Allen, en el radar de los Pelicans',
           fecha: '17 JUNIO 2024'
         },
         {
-          img: '/src/assets/img/noticias/n5.jpg',
+          img: img5,
           noticia: 'Andre Drummond busca nuevo equipo',
           fecha: '17 JUNIO 2024'
         }
