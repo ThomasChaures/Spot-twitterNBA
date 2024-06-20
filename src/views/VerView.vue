@@ -1,14 +1,15 @@
+vue Copiar código
 <template>
   <main class="animate__animated animate__slideInDown">
-    <Login v-if="user === ''" @submit="handleLogin()" />
+    <Login v-if="!user" @submit="handleLogin" />
     <template v-else>
       <div v-show="flagEdit">
-        <CambiarNombre :user="user" @bandera="bandera()" @update="getUser()" />
+        <CambiarNombre :user="user" @bandera="toggleEdit" @update="getUser" />
       </div>
       <section class="firsUserS">
         <div class="banner"></div>
         <div class="img-user">
-          <img src="@/assets/img/user.png" alt="" />
+          <img src="@/assets/img/user.png" alt="User Image" />
         </div>
         <div class="userTg">
           <p>@{{ user }}</p>
@@ -17,16 +18,16 @@
       </section>
 
       <section>
-        <template v-if="twits.length >= 1">
+        <template v-if="twits.length > 0">
           <ul>
             <li v-for="(item, index) in twits" :class="'index-' + index" :key="index">
               <div class="lastTwit">
                 <div class="buttonsAction">
                   <router-link class="butOn" :to="'/twit/' + index">Editar</router-link>
-                  <button @click="borrar(index)">Eliminar</button>
+                  <button @click="deleteTwit(index)">Eliminar</button>
                 </div>
                 <div class="img-perfil">
-                  <img src="@/assets/img/user.png" alt="Descripción de la imagen" />
+                  <img src="@/assets/img/user.png" alt="User Profile Image" />
                 </div>
                 <div>
                   <p class="user">@{{ user }}</p>
@@ -225,48 +226,50 @@ section {
 <script>
 import Login from '../components/login.vue'
 import CambiarNombre from '../components/CambiarNombre.vue'
+
 export default {
   name: 'VerView',
   components: {
     Login,
     CambiarNombre
   },
-  data: function () {
+  data() {
     return {
       user: '',
       twits: [],
       flagEdit: false,
-      mensaje: 'No cuenta con ningun posteo hecho.'
+      mensaje: 'No cuenta con ningún posteo hecho.'
     }
   },
-  mounted: function () {
-    this.getTwits()
-    this.getUser()
+  mounted() {
+    this.initializeUserAndTwits()
   },
   methods: {
-    getTwits: function () {
-      const loTwits = localStorage.getItem('twits')
-      this.twits = JSON.parse(loTwits)
-      console.log(this.twits)
-    },
-    borrar: function (indice) {
-      this.twits.splice(indice, 1)
-      localStorage.setItem('twits', JSON.stringify(this.twits))
+    initializeUserAndTwits() {
+      this.getUser()
       this.getTwits()
     },
-    bandera: function (bool) {
+    getTwits() {
+      const storedTwits = localStorage.getItem('twits')
+      this.twits = storedTwits ? JSON.parse(storedTwits) : []
+    },
+    deleteTwit(index) {
+      this.twits.splice(index, 1)
+      localStorage.setItem('twits', JSON.stringify(this.twits))
+    },
+    toggleEdit(bool) {
       this.flagEdit = bool
     },
     getUser() {
-      const localUser = localStorage.getItem('user')
-      if (localUser) {
-        this.user = JSON.parse(localUser)
+      const storedUser = localStorage.getItem('user')
+      if (storedUser) {
+        this.user = JSON.parse(storedUser)
       }
     },
     handleLogin() {
-      const usuario = localStorage.getItem('user')
-      if (usuario != '') {
-        this.user = JSON.parse(usuario)
+      const storedUser = localStorage.getItem('user')
+      if (storedUser) {
+        this.user = JSON.parse(storedUser)
       }
     }
   }
